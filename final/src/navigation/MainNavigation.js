@@ -1,9 +1,9 @@
-import {NavigationContainer} from "@react-navigation/native"
+import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack"
 
-import Register from "../screens/Register/Register"
+import Register from "../screens/Register/Register";
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 function MainNavigation() {
     return (
