@@ -10,6 +10,7 @@ class Register extends Component {
             username:"",
             email:"",
             password:"",
+            /*error: "", */
         }
     }
 
@@ -26,6 +27,9 @@ class Register extends Component {
         })
         .then(resp => this.props.navigation.navigate("Login"))
         .catch(err => console.log(err))
+        /*.catch(error => {
+            this.setState({error: "fallo en el registro"})
+        })*/
     }
 
   render() {
@@ -71,7 +75,7 @@ const styles = StyleSheet.create({
     contenedor:{
         flex:1,
         justifyContent:'center',
-        paddingHorizontal:100,
+        padding:100,
     },
     input: {
         borderWidth: 1,

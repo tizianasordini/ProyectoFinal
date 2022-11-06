@@ -1,6 +1,6 @@
-import { Text, View, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
-import React, { Component } from 'react'
-import { auth } from '../../firebase/config'
+import { Text, View, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import React, { Component } from "react";
+import { auth } from "../../firebase/config";
 
 class Login extends Component {
     constructor(props){
@@ -14,7 +14,7 @@ class Login extends Component {
     componentDidMount(){
         auth.onAuthStateChanged(user => {
         if(user !== null){
-            this.props.navigation.navigate('TabNavigation')
+            this.props.navigation.navigate("TabNavigation")
         }})
       /* auth.signOut() */
     }
@@ -22,7 +22,7 @@ class Login extends Component {
     loguear(email, password){
         auth.signInWithEmailAndPassword(email, password)
         .then(resp => {
-          this.props.navigation.navigate('TabNavigation')
+          this.props.navigation.navigate("TabNavigation")
         })
         .catch( err => console.log(err))
     }
@@ -33,15 +33,15 @@ class Login extends Component {
           <Text>¡Bienvenido!</Text>
           <TextInput
               style={styles.input}
-              keyboardType='email-address'
-              placeholder='Correo electrónico'
+              keyboardType="email-address"
+              placeholder="Correo electrónico"
               onChangeText={text => this.setState({email: text})}
               value={this.state.email}
           />
           <TextInput
               style={styles.input}
-              keyboardType='default'
-              placeholder='Contraseña'
+              keyboardType="default"
+              placeholder="Contraseña"
               onChangeText={text => this.setState({password: text})}
               value={this.state.password}
               secureTextEntry={true}
@@ -53,7 +53,7 @@ class Login extends Component {
           </View>
 
           <View>
-            <TouchableOpacity onPress={()=> this.props.navigation.navigate('Register')}>
+            <TouchableOpacity onPress={()=> this.props.navigation.navigate("Register")}>
               <Text>¿No tienes una cuenta? Regístrate</Text>
             </TouchableOpacity>
           </View>
@@ -65,17 +65,17 @@ class Login extends Component {
 const styles = StyleSheet.create({
     contenedor:{
         flex:1,
-        justifyContent:'center',
-        paddingHorizontal:100,
+        justifyContent:"center",
+        padding:100,
     },
     input:{
         borderWidth:1
     },
     boton:{
-        alignItems: 'center',
+        alignItems: "center",
         borderRadius: 10,
         padding: 8,
-        backgroundColor: 'blue'
+        backgroundColor: "blue"
     }
 })
 
