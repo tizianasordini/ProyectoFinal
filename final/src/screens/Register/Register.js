@@ -34,21 +34,21 @@ class Register extends Component {
         <Text>¡ Registrate !</Text>
         <TextInput
             style={styles.input}
-            placeholder="Escribe tu nombre de usuario"
+            placeholder="Usuario"
             keyboardType="default"
             onChangeText={text => this.setState({username: text})}
             value={this.state.username}
         />
         <TextInput
             style={styles.input}
-            placeholder="Escribe tu email"
+            placeholder="Correo electrónico"
             keyboardType="email-address"
             onChangeText={text => this.setState({email: text})}
             value={this.state.email}
         />
         <TextInput
             style={styles.input}
-            placeholder="Escribe tu contraseña"
+            placeholder="Contraseña"
             keyboardType="default"
             onChangeText={text => this.setState({password: text})}
             value={this.state.password}
@@ -57,6 +57,9 @@ class Register extends Component {
         <View>
             <TouchableOpacity style={styles.boton} onPress={() => this.registrarUsuario(this.state.username, this.state.email, this.state.password)}>
                 <Text>Registrarme</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=> this.props.navigation.navigate('Login')}>
+              <Text>¿Ya tienes una cuenta? Iniciar sesión</Text>
             </TouchableOpacity>
         </View>
     </View>
@@ -71,12 +74,12 @@ const styles = StyleSheet.create({
         paddingHorizontal:100,
     },
     input: {
-        borderWidth: 2,
+        borderWidth: 1,
     },
     boton:{
         alignItems: 'center',
         borderRadius: 10,
-        padding: 10,
+        padding: 8,
         backgroundColor: 'blue'
     }
 })
