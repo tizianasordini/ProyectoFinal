@@ -10,26 +10,23 @@ class Register extends Component {
             username:"",
             email:"",
             password:"",
-            /*error: "", */
+            mensaje: "",
         }
     }
 
     registrarUsuario(username, email, password){
-        auth.createUserWithEmailAndPassword(email, password)
-        .then(()=> {
-            return(
-                db.collection("users").add({
-                    email: email,
-                    username: username,
-                    createdAt: Date.now()
+                auth.createUserWithEmailAndPassword(email, password)
+                .then(()=> {
+                    return(
+                        db.collection("users").add({
+                            email: email,
+                            username: username,
+                            createdAt: Date.now()
+                        })
+                    )
                 })
-            )
-        })
-        .then(resp => this.props.navigation.navigate("Login"))
-        .catch(err => console.log(err))
-        /*.catch(error => {
-            this.setState({error: "fallo en el registro"})
-        })*/
+                .then(resp => this.props.navigation.navigate("TabNavigation"))
+                .catch(error => console.log(this.setState({mensaje: error.message})))
     }
 
   render() {
@@ -58,6 +55,8 @@ class Register extends Component {
             value={this.state.password}
             secureTextEntry={true}
         />
+        <Text style={styles.textoerror}>{this.state.mensaje}</Text>
+        
         <View>
             <TouchableOpacity style={styles.boton} onPress={() => this.registrarUsuario(this.state.username, this.state.email, this.state.password)}>
                 <Text>Registrarme</Text>
@@ -85,7 +84,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 8,
         backgroundColor: 'blue'
-    }
+    },
+    textoerror: {
+        color: "red"
+    },
 })
 
 export default Register;
