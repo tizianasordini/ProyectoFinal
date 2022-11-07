@@ -8,6 +8,7 @@ class Login extends Component {
         this.state = {
             email:"",
             password:"",
+            mensaje: "",
         }
     }
 
@@ -24,7 +25,7 @@ class Login extends Component {
         .then(resp => {
           this.props.navigation.navigate("TabNavigation")
         })
-        .catch( err => console.log(err))
+        .catch(error => console.log(this.setState({mensaje: error.message})))
     }
 
     render() {
@@ -46,6 +47,9 @@ class Login extends Component {
               value={this.state.password}
               secureTextEntry={true}
           />
+          
+          <Text style={styles.textoerror}>{this.state.mensaje}</Text>
+
           <View>
               <TouchableOpacity style={styles.boton} onPress={()=> this.loguear(this.state.email, this.state.password)}>
                   <Text>Iniciar sesión</Text>
@@ -76,7 +80,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 8,
         backgroundColor: "blue"
-    }
+    },
+    textoerror: {
+      color: "red"
+  }
 })
 
 export default Login;
