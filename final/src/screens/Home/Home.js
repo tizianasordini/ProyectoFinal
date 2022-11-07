@@ -7,22 +7,24 @@ import Posteo from '../../components/Posteo/Posteo'
 class Home extends Component {
   constructor(){
     super()
-    this.setState={
+    this.state={
       losPosteos:[]
     }
   }
 
   componentDidMount(){
     db.collection('posteo').onSnapshot(docs =>{ 
-      let posteos = []
+      
+      let posteo = []
       docs.forEach(doc => {
-        posteos.push({
+        posteo.push({
           id:doc.id,
           data:doc.data()
         })
       })
+      
       this.setState({
-        losPosteos: posteos
+        losPosteos: posteo
       })
     })
   }
