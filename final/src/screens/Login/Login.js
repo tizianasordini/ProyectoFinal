@@ -52,7 +52,7 @@ class Login extends Component {
 
           <View>
               <TouchableOpacity style={styles.boton} onPress={()=> this.loguear(this.state.email, this.state.password)}>
-                  <Text>Iniciar sesión</Text>
+                  <Text style={styles.textoBoton}>Iniciar sesión</Text>
               </TouchableOpacity>
           </View>
 
@@ -67,23 +67,32 @@ class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-    contenedor:{
-        flex:1,
-        justifyContent:"center",
-        padding:100,
-    },
-    input:{
-        borderWidth:1
-    },
-    boton:{
-        alignItems: "center",
-        borderRadius: 10,
-        padding: 8,
-        backgroundColor: "blue"
-    },
-    textoerror: {
-      color: "red"
-  }
+  contenedor:{
+    flex:1,
+    justifyContent:'center',
+    paddingHorizontal: "7%",
+    backgroundColor: "#FDFDFF",
+},
+input: {
+    borderWidth: 1,
+    borderColor: "grey",
+    marginTop: 5,
+    marginBottom: 5,
+    backgroundColor: "#E7E7E7",
+    padding: 10
+},
+boton:{
+    alignItems: 'center',
+    borderRadius: 10,
+    padding: 8,
+    backgroundColor: 'blue'
+},
+textoerror: {
+    color: "red"
+},
+textoBoton: {
+  color: "white"
+},
 })
 
 export default Login;

@@ -7,6 +7,7 @@ class Register extends Component {
     constructor(){
         super()
         this.state = {
+            bio: "",
             username:"",
             email:"",
             password:"",
@@ -19,6 +20,7 @@ class Register extends Component {
                 .then(()=> {
                     return(
                         db.collection("users").add({
+                            bio:bio,
                             email: email,
                             username: username,
                             createdAt: Date.now()
@@ -42,6 +44,13 @@ class Register extends Component {
         />
         <TextInput
             style={styles.input}
+            placeholder="Biografía"
+            keyboardType="default"
+            onChangeText={text => this.setState({bio: text})}
+            value={this.state.bio}
+        />
+        <TextInput
+            style={styles.input}
             placeholder="Correo electrónico"
             keyboardType="email-address"
             onChangeText={text => this.setState({email: text})}
@@ -59,7 +68,7 @@ class Register extends Component {
         
         <View>
             <TouchableOpacity style={styles.boton} onPress={() => this.registrarUsuario(this.state.username, this.state.email, this.state.password)}>
-                <Text>Registrarme</Text>
+                <Text style={styles.textoBoton}>Registrarme</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=> this.props.navigation.navigate('Login')}>
               <Text>¿Ya tienes una cuenta? Iniciar sesión</Text>
@@ -74,10 +83,15 @@ const styles = StyleSheet.create({
     contenedor:{
         flex:1,
         justifyContent:'center',
-        padding:100,
+        paddingHorizontal: "7%",
+        backgroundColor: "#FDFDFF",
     },
     input: {
         borderWidth: 1,
+        marginTop: 5,
+        marginBottom: 5,
+        backgroundColor: "#E7E7E7",
+        padding: 10,
     },
     boton:{
         alignItems: 'center',
@@ -88,6 +102,9 @@ const styles = StyleSheet.create({
     textoerror: {
         color: "red"
     },
+    textoBoton: {
+        color: "white"
+    }
 })
 
 export default Register;
