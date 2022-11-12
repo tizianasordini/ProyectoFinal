@@ -84,7 +84,6 @@ import { Text, View, TextInput, TouchableOpacity, } from "react-native";
 import {auth, db} from '../../firebase/config';
 import Camara from "../../components/Camara/Camara";
 
-
 class Posteo extends Component {
     constructor(){
         super();
