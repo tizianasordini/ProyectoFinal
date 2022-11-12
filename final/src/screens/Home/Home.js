@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {View, Text, StyleSheet, Image, FlatList, ActivityIndicator, TouchableOpacity} from 'react-native'
+import {View, Text, StyleSheet, FlatList} from 'react-native'
 import {db} from '../../firebase/config'
-import Posteo from '../../components/Posteo/Posteo'
+import Posteos from '../../components/Posteos/Posteos'
 
 
 class Home extends Component {
@@ -13,7 +13,7 @@ class Home extends Component {
   }
 
   componentDidMount(){
-    db.collection('posteo').onSnapshot(docs =>{ 
+    db.collection('posteos').onSnapshot(docs =>{ 
       
       let posteo = []
       docs.forEach(doc => {
@@ -38,7 +38,7 @@ class Home extends Component {
           <FlatList
             data={this.state.losPosteos}
             keyExtractor={item => item.id.toString()}
-            renderItem={({item}) => <Posteo data={item.data}/>}
+            renderItem={({item}) => <Posteos data={item.data}/>}
           />
         </View>
       </>
@@ -51,6 +51,9 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  container2:{
+    flex: 3
   }
 })
 

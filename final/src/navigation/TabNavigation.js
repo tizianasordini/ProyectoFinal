@@ -1,6 +1,5 @@
 import React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-
 import Home from "../screens/Home/Home";
 import Posteo from "../screens/Posteo/Posteo";
 
