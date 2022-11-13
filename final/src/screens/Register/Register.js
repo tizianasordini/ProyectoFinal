@@ -34,7 +34,7 @@ class Register extends Component {
   render() {
     return (
     <View style={styles.contenedor}>
-        <Text>¡ Registrate !</Text>
+        <Text>¡Únete a la comunidad digital viajera!</Text>
         <TextInput
             style={styles.input}
             placeholder="Usuario"
@@ -88,23 +88,26 @@ const styles = StyleSheet.create({
     },
     input: {
         borderWidth: 1,
-        marginTop: 5,
-        marginBottom: 5,
+        borderColor: "grey",
+        marginTop: 8,
+        marginBottom: 8,
         backgroundColor: "#E7E7E7",
-        padding: 10,
+        padding: 7
     },
     boton:{
         alignItems: 'center',
         borderRadius: 10,
-        padding: 8,
-        backgroundColor: 'blue'
+        padding: 7,
+        backgroundColor: 'black',
+        marginTop: 8,
+        marginBottom: 8,
     },
     textoerror: {
         color: "red"
     },
     textoBoton: {
         color: "white"
-    }
+    },
 })
 
 export default Register;

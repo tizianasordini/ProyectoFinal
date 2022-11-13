@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, TextInput, Image } from "react-native";
 import React, { Component } from "react";
 import { auth } from "../../firebase/config";
 
@@ -31,7 +31,11 @@ class Login extends Component {
     render() {
       return (
         <View style={styles.contenedor}>
-          <Text>¡Bienvenido!</Text>
+          <Image
+          style={styles.image}
+          source={require("../../../assets/global.png")}
+          resizeMode="contain"
+          />
           <TextInput
               style={styles.input}
               keyboardType="email-address"
@@ -76,22 +80,27 @@ const styles = StyleSheet.create({
 input: {
     borderWidth: 1,
     borderColor: "grey",
-    marginTop: 5,
-    marginBottom: 5,
+    marginTop: 8,
+    marginBottom: 8,
     backgroundColor: "#E7E7E7",
-    padding: 10
+    padding: 7
 },
 boton:{
     alignItems: 'center',
     borderRadius: 10,
-    padding: 8,
-    backgroundColor: 'blue'
+    padding: 7,
+    backgroundColor: 'black',
+    marginTop: 8,
+    marginBottom: 8,
 },
 textoerror: {
-    color: "red"
+  color: "red"
 },
 textoBoton: {
   color: "white"
+},
+image: {
+  height: 100,
 },
 })
 
