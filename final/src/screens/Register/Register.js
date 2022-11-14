@@ -34,7 +34,7 @@ class Register extends Component {
   render() {
     return (
     <View style={styles.contenedor}>
-        <Text>¡Únete a la comunidad digital viajera!</Text>
+        <Text style={styles.titulo}>¡Únete a la comunidad digital viajera!</Text>
         <TextInput
             style={styles.input}
             placeholder="Usuario"
@@ -67,13 +67,18 @@ class Register extends Component {
         <Text style={styles.textoerror}>{this.state.mensaje}</Text>
         
         <View>
+
             <TouchableOpacity style={styles.boton} onPress={() => this.registrarUsuario(this.state.username, this.state.email, this.state.password)}>
                 <Text style={styles.textoBoton}>Registrarme</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=> this.props.navigation.navigate('Login')}>
-              <Text>¿Ya tienes una cuenta? Iniciar sesión</Text>
-            </TouchableOpacity>
+
+            <Text>¿Ya tienes una cuenta? <TouchableOpacity onPress={()=> this.props.navigation.navigate('Login')}>
+                <Text style={styles.textoLink}>Inicia sesión</Text>
+                </TouchableOpacity>
+            </Text>
+
         </View>
+
     </View>
     )
     }
@@ -86,12 +91,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: "7%",
         backgroundColor: "#FDFDFF",
     },
+    titulo: {
+        fontSize: 20,
+        fontWeight: "bold",
+        marginBottom: 10
+    },
     input: {
         borderWidth: 1,
         borderColor: "grey",
         marginTop: 8,
         marginBottom: 8,
-        backgroundColor: "#E7E7E7",
+        backgroundColor: "white",
         padding: 7
     },
     boton:{
@@ -108,6 +118,9 @@ const styles = StyleSheet.create({
     textoBoton: {
         color: "white"
     },
+    textoLink: {
+        textDecorationLine: "underline",
+      },
 })
 
 export default Register;

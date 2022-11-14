@@ -17,7 +17,6 @@ class Login extends Component {
         if(user !== null){
             this.props.navigation.navigate("TabNavigation")
         }})
-      /* auth.signOut() */
     }
 
     loguear(email, password){
@@ -61,13 +60,14 @@ class Login extends Component {
           </View>
 
           <View>
-            <TouchableOpacity onPress={()=> this.props.navigation.navigate("Register")}>
-              <Text>¿No tienes una cuenta? Regístrate</Text>
-            </TouchableOpacity>
+            <Text>¿No tienes una cuenta? <TouchableOpacity onPress={()=> this.props.navigation.navigate("Register")}>
+              <Text style={styles.textoLink}>Regístrate</Text>
+              </TouchableOpacity> 
+            </Text>
           </View>
         </View>
       )
-  }
+    }
 }
 
 const styles = StyleSheet.create({
@@ -82,7 +82,7 @@ input: {
     borderColor: "grey",
     marginTop: 8,
     marginBottom: 8,
-    backgroundColor: "#E7E7E7",
+    backgroundColor: "white",
     padding: 7
 },
 boton:{
@@ -98,6 +98,9 @@ textoerror: {
 },
 textoBoton: {
   color: "white"
+},
+textoLink: {
+  textDecorationLine: "underline",
 },
 image: {
   height: 100,
