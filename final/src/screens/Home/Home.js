@@ -31,9 +31,6 @@ class Home extends Component {
   render() {
     return (
       <>
-        <View style={styles.container1}>
-          <Text>Home</Text>
-        </View>
         <View style={styles.container2}>
           <FlatList
             data={this.state.losPosteos}
