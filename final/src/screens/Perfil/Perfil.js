@@ -6,29 +6,35 @@ class Perfil extends Component {
     constructor(props){
         super(props)
         this.state ={
-        allPosts: []
+        allPosts: [],
+        user: {}
       }
     }
 
     componentDidMount(){
-      db.collection('posteos')
-        //.where
-      .onSnapshot(docs => {
-
-        let posts = []
-        docs.forEach(doc => {
-          posts.push({
-            id: doc.id,
-            data: doc.data()
-          })
-        })
+        db.collection('users')
+      .where('email', '==', auth.currentUser.email)
+      .onSnapshot((docs) => {
+            let usersDb = [];
+            docs.forEach((doc) => {
+                usersDb.push({
+                    id: doc.id,
+                    data: doc.data()
+                })
+            })
+    
+            this.setState({
+                user: usersDb[0]
+            }, ()=> console.log(this.state))
+        }
+      )
   
-        this.setState({
-          allPosts: posts
-        }, () => console.log(this.state.allPosts))
-      })
+    
     }
-    //
+
+
+
+      
 
     signOut(){
         auth.signOut()
@@ -39,7 +45,27 @@ class Perfil extends Component {
         return(
             <View>
                 <Text>Perfil</Text>
-                <Text >Bienvenido: </Text>
+                {
+                    this.state.user.data ?
+                        <Text >{this.state.user.data.username}</Text>
+                        : ""
+                }
+                {
+                    this.state.user.data ?
+                        <Text >{this.state.user.data.email}</Text>
+                        : ""
+                }
+                {
+                    this.state.user.data ?
+                        <Text >{this.state.user.data.bio}</Text>
+                        : ""
+                }
+                {
+                    this.state.user.data ?
+                        <Text >Posteos: {this.state.allPosts.length}</Text>
+                        : ""
+                }
+                
                 <TouchableOpacity
                 onPress={() => this.signOut()}
                 style = {styles.button}
