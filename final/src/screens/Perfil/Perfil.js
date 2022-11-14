@@ -61,54 +61,77 @@ class Perfil extends Component {
     
     render() { 
         return(
-            <View>
-                
-                {
-                    this.state.user.data ?
-                        <Text >{this.state.user.data.username}</Text>
-                        : ""
-                }
-                {
-                    this.state.user.data ?
-                        <Text >{this.state.user.data.email}</Text>
-                        : ""
-                }
-                {
-                    this.state.user.data ?
-                        <Text >{this.state.user.data.bio}</Text>
-                        : ""
-                }
-                {
-                    this.state.user.data ?
-                        <Text >Posteos: {this.state.allPosts.length}</Text>
-                        : ""
-                }
-                {
-                    this.state.user.data ?
-                        <FlatList
-                            data = {this.state.allPosts}
-                            keyExtractor = { item => item.id.toString()}
-                            renderItem = {({item}) => <Posteos data={item.data}/>}
-                        />
-                        : ""
-                }
+            <View style={styles.contenedor}>
+                <View style={styles.usuario}>
+                    {
+                        this.state.user.data ?
+                            <Text style={styles.textoUsuario}>{this.state.user.data.username}</Text>
+                            : ""
+                    }
+                    {
+                        this.state.user.data ?
+                            <Text >{this.state.user.data.bio}</Text>
+                            : ""
+                    }
+                    {
+                        this.state.user.data ?
+                            <Text >{this.state.user.data.email}</Text>
+                            : ""
+                    }
+                    {
+                        this.state.user.data ?
+                            <Text >Posteos: {this.state.allPosts.length}</Text>
+                            : ""
+                    }
+                </View>
 
-                <TouchableOpacity
-                onPress={() => this.signOut()}
-                style = {styles.button}
-                >
-                    <Text>Cerrar sesión</Text>
-                </TouchableOpacity>
+                <View>
+                    {
+                        this.state.user.data ?
+                            <FlatList
+                                data = {this.state.allPosts}
+                                keyExtractor = { item => item.id.toString()}
+                                renderItem = {({item}) => <Posteos data={item.data}/>}
+                            />
+                            : ""
+                    }
+                </View>
+
+                <View>
+                    <TouchableOpacity
+                    onPress={() => this.signOut()}
+                    style = {styles.boton}
+                    >
+                        <Text style = {styles.textoBoton}>Cerrar sesión</Text>
+                    </TouchableOpacity>
+                </View>
+                
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    button:{
-      padding:10,
-      borderColor:'blue',
-      borderWidth: 1
-   } })
+    contenedor:{
+        flex:1,
+        paddingHorizontal: "7%",
+        backgroundColor: "#FDFDFF",
+    },
+    boton:{
+        alignItems: 'center',
+        borderRadius: 10,
+        padding: 7,
+        backgroundColor: 'black',
+        marginTop: 8,
+        marginBottom: 8,
+    },
+    textoBoton: {
+        color: "white"
+      },
+    textoUsuario: {
+        fontSize: 30,
+        fontWeight: "bold",
+    }
+})
 
 export default Perfil
