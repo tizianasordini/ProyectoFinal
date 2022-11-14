@@ -1,6 +1,8 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React, {Component} from 'react'
 import { auth, db } from '../../firebase/config'
+import { FlatList } from 'react-native-gesture-handler'
+import Posteos from '../../components/Posteos/Posteos'
 
 class Perfil extends Component {
     constructor(props){
@@ -28,7 +30,23 @@ class Perfil extends Component {
             }, ()=> console.log(this.state))
         }
       )
-  
+    
+      db.collection('posteos')
+      .where('owner', '==', auth.currentUser.email)
+      .onSnapshot((docs) => {
+            let posteoAmigo = [];
+            docs.forEach((doc) => {
+                posteoAmigo.push({
+                    id: doc.id,
+                    data: doc.data()
+                })
+            })
+    
+            this.setState({
+                allPosts: posteoAmigo
+            }, ()=> console.log(this.state))
+        }
+      )
     
     }
 
@@ -44,7 +62,7 @@ class Perfil extends Component {
     render() { 
         return(
             <View>
-                <Text>Perfil</Text>
+                
                 {
                     this.state.user.data ?
                         <Text >{this.state.user.data.username}</Text>
@@ -65,7 +83,16 @@ class Perfil extends Component {
                         <Text >Posteos: {this.state.allPosts.length}</Text>
                         : ""
                 }
-                
+                {
+                    this.state.user.data ?
+                        <FlatList
+                            data = {this.state.allPosts}
+                            keyExtractor = { item => item.id.toString()}
+                            renderItem = {({item}) => <Posteos data={item.data}/>}
+                        />
+                        : ""
+                }
+
                 <TouchableOpacity
                 onPress={() => this.signOut()}
                 style = {styles.button}
