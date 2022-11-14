@@ -2,6 +2,8 @@ import React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home/Home";
 import Posteo from "../screens/Posteo/Posteo";
+import Perfil from "../screens/Perfil/Perfil";
+
 
 const Tab = createBottomTabNavigator()
 
@@ -16,7 +18,13 @@ function TabNavigation() {
             name = "Posteo"
             component={Posteo}
             />
+            <Tab.Screen
+            name="Perfil"
+            component={Perfil}
+            />
+
         </Tab.Navigator>
+    
     )
 }
 
