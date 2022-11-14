@@ -13,8 +13,7 @@ class Home extends Component {
   }
 
   componentDidMount(){
-    db.collection('posteos').onSnapshot(docs =>{ 
-      
+    db.collection('posteos').onSnapshot(docs =>{
       let posteo = []
       docs.forEach(doc => {
         posteo.push({
