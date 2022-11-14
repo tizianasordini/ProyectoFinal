@@ -15,7 +15,7 @@ class Register extends Component {
         }
     }
 
-    registrarUsuario(username, email, password){
+    registrarUsuario(username, email, password, bio){
                 auth.createUserWithEmailAndPassword(email, password)
                 .then(()=> {
                     return(
@@ -68,7 +68,7 @@ class Register extends Component {
         
         <View>
 
-            <TouchableOpacity style={styles.boton} onPress={() => this.registrarUsuario(this.state.username, this.state.email, this.state.password)}>
+            <TouchableOpacity style={styles.boton} onPress={() => this.registrarUsuario(this.state.username, this.state.email, this.state.password, this.state.bio)}>
                 <Text style={styles.textoBoton}>Registrarme</Text>
             </TouchableOpacity>
 
