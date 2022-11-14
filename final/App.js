@@ -3,11 +3,7 @@ import MainNavigation from "./src/navigation/MainNavigation";
 
 function App() {
   return (
-    <>
-      {
-        <MainNavigation />
-      }
-    </>
+    <MainNavigation />
   );
 }
 

@@ -22,7 +22,7 @@ class Posteo extends Component {
             description: this.state.description,
             likes: [],
             comentarios: [],
-            foto: this.state.url,
+            foto: this.state.url,     //declaro metodo onImageupload
         })
         .then(() => {
             console.log('Creo un posteo');
@@ -32,6 +32,14 @@ class Posteo extends Component {
             })
         })
         .catch(error => console.log(error))
+    }
+
+    onImageUpload(url){
+        this.setState({
+            url: url, 
+            mostrarCamara: false,
+        })
+
     }
 
     render() {
