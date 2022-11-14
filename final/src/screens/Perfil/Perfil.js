@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import { auth, db } from '../../firebase/config'
 import { FlatList } from 'react-native-gesture-handler'
 import Posteos from '../../components/Posteos/Posteos'
+// import { getAuth, deleteUser } from "firebase/auth";
 
 class Perfil extends Component {
     constructor(props){
@@ -50,15 +51,24 @@ class Perfil extends Component {
     
     }
 
-
-
-      
-
     signOut(){
         auth.signOut()
         this.props.navigation.navigate('Login')
     }
     
+    /*
+    Eliminar un usuario (ejercicio adicional) 
+    delete(user).then(() => {
+    //la colección tenemos que borrar
+    })
+    .catch((error)=> console.log(error))
+
+    deleteUser(user).then(() => {
+    auth.currentUser
+    })
+    .catch((error)=> console.log(error))
+    */
+
     render() { 
         return(
             <View style={styles.contenedor}>
@@ -105,8 +115,9 @@ class Perfil extends Component {
                         <Text style = {styles.textoBoton}>Cerrar sesión</Text>
                     </TouchableOpacity>
                 </View>
-                
+
             </View>
+
         )
     }
 }
