@@ -7,7 +7,7 @@ class Comentarios extends Component {
     constructor(props){
         super(props)
         this.state= {
-            cometario: ''
+            comentario: ''
         }
     }
 
@@ -50,3 +50,5 @@ class Comentarios extends Component {
 }
 
 export default Comentarios
+
+

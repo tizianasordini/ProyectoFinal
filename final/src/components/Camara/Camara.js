@@ -2,8 +2,7 @@ import {Camera} from 'expo-camera';
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, Image} from 'react-native'
 import { storage } from '../../firebase/config';
-// import {FontAwesomeIcon} from '@fortawsome/react-fontawesome'
-// import {faCamera, faCheckCircle, faTimesCircle} from '@fortawsome/free-solid-svg-icons'    // importo iconos o fuentes de letras para que quede mas lindo en el proyecto. Es como cuando impotabamos las font famillies para usar otras!
+
 
 class Camara extends Component{
     constructor(props){
@@ -60,6 +59,7 @@ class Camara extends Component{
     }
     
     render() {
+      console.log('hola')
         return (
           <>
             {this.state.foto ? (
@@ -77,7 +77,7 @@ class Camara extends Component{
                   </TouchableOpacity>
                 </View>
               </>
-            ) : (
+            ) :  (
               <>
                 <Camera
                   style={{ flex: 1, width: "100%" }}
@@ -88,7 +88,7 @@ class Camara extends Component{
                     <Text>Tomar Foto</Text>
                 </TouchableOpacity>
               </>
-            )}
+            )} 
           </>
         );
       }
