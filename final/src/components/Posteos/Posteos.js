@@ -61,8 +61,8 @@ class Posteos extends Component {
       <View style={styles.posteo}>
         <Text>{this.props.username}</Text>
         <Image style={styles.image} source={this.props.data.foto} resizeMode={'contain'}/>
-        <View style={styles.datosPost}>
-        <Text style={styles.tituloPost} >{this.props.data.description}</Text>
+        <View style={styles.posteosData}>
+        <Text style={styles.posteoTitulo} >{this.props.data.description}</Text>
         <View>
         <Text>{this.state.likesCount}</Text>  
        
@@ -79,8 +79,11 @@ class Posteos extends Component {
         }
         </View>
         <View>
-            <TouchableOpacity>
-                
+            <TouchableOpacity onPress={()=> this.props.navigation.navigate(
+                'Comentarios',
+                {id:this.props.id}
+            )}>
+                <Text>Crear Comentario</Text>                
             </TouchableOpacity>
         </View>
       </View>
@@ -90,14 +93,12 @@ class Posteos extends Component {
   
 }
 const styles = StyleSheet.create({
-  container:{
-      flex:1,
-      marginBottom: 20,
-      
-  },
-  camarabody:{
-      height:500
-  },
+    posteo:{
+        marginBottom: 60,
+        backgroundColor: 'lightgrey',
+        borderEndWidth: 10,
+        borderEndColor: 'black',
+      },
   image:{
       height: 300,
       width: 300,
@@ -106,16 +107,17 @@ const styles = StyleSheet.create({
       
       
   },
-  posteo:{
-    marginBottom: 60,
-    backgroundColor: 'lightgrey',
-    borderEndWidth: 10,
-    borderEndColor: 'black',
+  posteosData:{
+    margin: 10
   },
-  tituloPost:{
+  posteoTitulo:{
     fontSize: '16px',
     marginBottom: 10
     
+  },
+  container:{
+    flex:1,
+    marginBottom: 20,
   },
   usuario:{
     fontWeight: 'bold',
@@ -124,9 +126,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 15
   },
-  datosPost:{
-    margin: 10
-  }
+  
 })
 
 export default Posteos 

@@ -1,53 +1,85 @@
-import React, { Component } from "react"
-import {View, Text, TextInput, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
-import { auth, db } from "../../firebase/config";
-import firebase from "firebase";
+import { Text, View, TextInput, TouchableOpacity, StyleSheet, FlatList } from 'react-native'
+import React, { Component } from 'react'
+import {db, auth} from '../../firebase/config'
+import firebase from 'firebase'
 
 class Comentarios extends Component {
-    constructor(props){
-        super(props)
-        this.state= {
-            comentario: ''
-        }
+  constructor(props){
+    super(props)
+    this.state = {
+      posteaComentario:'',
+      id:'',
+      data:{}
     }
+  }
 
+  componentDidMount(){  
+    db.collection('posteos').doc(this.props.route.params.id)
+    .onSnapshot(doc => {
+      this.setState({
+        id: doc.id,
+        data: doc.data(),
+      })
+    })
+  }
 
-    onSubmit(){
-        db.collection('posteos').doc(this.props.propsData.id).update({
-            comentarios: firebase.firestore.FieldValue.arrayUnion({
-                owner: auth.currentUser.email,
-                comentarios: this.state.comentario,
-                createdAt: Date.now()
-            })
-        })
-        .then(()=> {
-            console.log('Se creo un comentario')
-        })
-        .catch((error)=> console.log(error))
-    }       
+  nuevoComentario(idDoc, text){
+    db.collection('posteos')
+    .doc(idDoc)
+    .update({
+      comentarios: firebase.firestore.FieldValue.arrayUnion({
+        owner:auth.currentUser.email,
+        createdAt: Date.now(),
+        comentario: text
+      })
+    })
+  }
 
-    render(){
-        return(
-            <View>
-                <Text>Comentarios</Text>
-                <FlatList
-                data={this.state.comentario}
-                keyExtractor={(posteos)=> posteos.id}
-                renderItem={({item})=> <Posteos posteosData={item}/>}
-                ></FlatList>
-                <TextInput
-                onChangeText={(text) => this.setState({comentario:text})}
-                placeholder= 'Hacer un comentario'
-                keyboardType='default'
-                ></TextInput>
-                <TouchableOpacity onPress={()=> this.onSubmit()}>
-                    <Text>Enviar comentario</Text>
-                </TouchableOpacity>
-            </View>
-        )
-    }
+  render() {
+    console.log(this.state)
+    return (
+      <View>
+        <Text>Seccion de Comentarios</Text>
+        <View>
 
+          <FlatList
+          data={this.state.data.comentarios}
+          keyExtractor={ item => item.createdAt.toString()}
+          renderItem={ ({item}) => 
+          <Text> {item.comentario} </Text>}/>
+
+          {
+            this.state.data.comentarios ?
+            <Text>Cantidad de Comentarios: {this.state.data.comentarios.length}</Text>
+            :
+            ''
+          }
+          
+
+        </View>
+        <View>
+          <TextInput
+            onChangeText={text => this.setState({posteaComentario: text})}
+            style = {styles.input}
+            keyboardType='default'
+            placeholder='Crea un comentario'
+            value={this.state.posteaComentario}
+          />
+          <TouchableOpacity onPress={()=> this.nuevoComentario(this.state.id, this.state.posteaComentario)}>
+            <Text>postear comentario</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    )
+  }
 }
+
+const styles = StyleSheet.create({
+  input: {
+    borderWidth:1,
+    height:32
+  }
+})
 
 export default Comentarios
 

@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack"
 
 import Register from "../screens/Register/Register";
 import Login from "../screens/Login/Login";
+import Comentarios from "../screens/Comentarios/Comentarios";
 import TabNavigation from "../navigation/TabNavigation"
 
 const Stack = createNativeStackNavigator();
@@ -31,6 +32,10 @@ function MainNavigation() {
             options={{
                 headerShown: false
             }}
+            />
+            <Stack.Screen
+            name='Comentarios'
+            component={Comentarios}
             />
         </Stack.Navigator>
     </NavigationContainer>
