@@ -104,9 +104,7 @@ const styles = StyleSheet.create({
       width: 300,
       resizeMode: 'contain',
       margin: 15,
-      
-      
-  },
+    },
   posteosData:{
     margin: 10
   },
