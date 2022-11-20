@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {View, Text, StyleSheet, FlatList} from 'react-native'
 import {db} from '../../firebase/config'
 import Posteos from '../../components/Posteos/Posteos'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
 class Home extends Component {

@@ -4,6 +4,7 @@ import {FontAwesome} from '@expo/vector-icons'
 import {db, auth} from '../../firebase/config'
 import firebase from 'firebase'
 import Comentarios from '../../screens/Comentarios/Comentarios'
+import HomeNavigation from '../../navigation/HomeNavigation'
 
 class Posteos extends Component {
 
@@ -59,7 +60,17 @@ class Posteos extends Component {
     console.log(this.props)
     return (
       <View style={styles.posteo}>
-        <Text>{this.props.username}</Text>
+        <TouchableOpacity  onPress={ () => this.props.navigation.navigate(
+          'HomeNavigation', 
+          {
+            screen: 'PerfilAmigos',
+            params:{
+              email:this.props.data.owner
+            }
+          }
+        )}>
+          <Text>{this.props.data.owner}</Text>
+        </TouchableOpacity>
         <Image style={styles.image} source={this.props.data.foto} resizeMode={'contain'}/>
         <View style={styles.posteosData}>
         <Text style={styles.posteoTitulo} >{this.props.data.description}</Text>
