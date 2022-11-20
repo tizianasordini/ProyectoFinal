@@ -9,7 +9,7 @@ class PerfilAmigos extends Component {
     render () {
       console.log(this.props);
         return (
-            <Text>Hola</Text>
+            <Text>Hola </Text>
         )
     }
 }

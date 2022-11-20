@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   container2:{
-    flex: 3
+    flex: 1
   }
 })
 
