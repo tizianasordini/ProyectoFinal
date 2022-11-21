@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import { auth, db } from '../../firebase/config'
-import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, TextInput } from 'react-native'
 import Posteos from '../../components/Posteos/Posteos'
-import { TextInput } from 'react-native-gesture-handler'
+
 
 
 class Buscador extends Component {

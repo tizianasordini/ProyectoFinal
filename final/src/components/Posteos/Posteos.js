@@ -60,9 +60,13 @@ class Posteos extends Component {
     console.log(this.props)
     return (
       <View style={styles.posteo}>
-        <TouchableOpacity  onPress={ () => this.props.navigation.navigate('HomeNavigation', {screen: 'PerfilAmigos', params:{email:this.props.data.owner}})}>
-          <Text>{this.props.data.owner}</Text>
-        </TouchableOpacity>
+        
+        <View>
+          <TouchableOpacity  onPress={ () => this.props.navigation.navigate('HomeNavigation', {screen: 'PerfilAmigos', params:{email:this.props.data.owner}})}>
+            <Text>{this.props.data.owner}</Text>
+          </TouchableOpacity>
+        </View>
+
         <Image style={styles.image} source={this.props.data.foto} resizeMode={'contain'}/>
         <View style={styles.posteosData}>
         <Text style={styles.posteoTitulo} >{this.props.data.description}</Text>

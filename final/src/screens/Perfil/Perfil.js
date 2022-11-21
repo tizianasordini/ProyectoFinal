@@ -1,7 +1,6 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native'
 import React, {Component} from 'react'
 import { auth, db } from '../../firebase/config'
-import { FlatList } from 'react-native-gesture-handler'
 import Posteos from '../../components/Posteos/Posteos'
 // import { getAuth, deleteUser } from "firebase/auth";
 
