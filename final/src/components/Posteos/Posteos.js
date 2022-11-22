@@ -38,7 +38,6 @@ class Posteos extends Component {
         })
       })
       .catch(err => console.log(err))
-
     }
 
     borrarLike(){
@@ -54,84 +53,72 @@ class Posteos extends Component {
       .catch(e => console.log(e))
     }
     
-   
-
   render() {
     console.log(this.props)
     return (
-      <View style={styles.posteo}>
+      <View style={styles.contenedorPosteo}>
         
         <View>
           <TouchableOpacity  onPress={ () => this.props.navigation.navigate('HomeNavigation', {screen: 'PerfilAmigos', params:{email:this.props.data.owner}})}>
-            <Text>{this.props.data.owner}</Text>
+            <Text style={styles.nombreUsuario}>{this.props.data.owner}</Text>
           </TouchableOpacity>
         </View>
 
         <Image style={styles.image} source={this.props.data.foto} resizeMode={'contain'}/>
-        <View style={styles.posteosData}>
-        <Text style={styles.posteoTitulo} >{this.props.data.description}</Text>
-        <View>
-        <Text>{this.state.likesCount}</Text>  
-       
-        {
-           this.state.miLike ?
-                <TouchableOpacity onPress={()=> this.borrarLike()}>
-                    <FontAwesome name='heart' color='black' size={16} />
-                </TouchableOpacity>
-                :
-                <TouchableOpacity onPress={()=> this.like()}>
-                    <FontAwesome name='heart-o' color='red' size={16} />
-                </TouchableOpacity>
 
-        }
-        </View>
-        <View>
-            <TouchableOpacity onPress={()=> this.props.navigation.navigate(
-                'Comentarios',
-                {id:this.props.id}
-            )}>
-                <Text>Crear Comentario</Text>                
+        <Text>{this.state.likesCount}</Text>
+          
+        {
+          this.state.miLike ?
+            <TouchableOpacity onPress={()=> this.borrarLike()}>
+              <FontAwesome name='heart' color='black' size={16} />
             </TouchableOpacity>
+            :
+            <TouchableOpacity onPress={()=> this.like()}>
+              <FontAwesome style={styles.corazon} name='heart-o' color='red' size={16} />
+            </TouchableOpacity>
+        }
+        
+        <View>
+          <Text style={styles.descripcion}>{this.props.data.description}</Text>
         </View>
-      </View>
+        
+        <View>
+          <TouchableOpacity onPress={()=> this.props.navigation.navigate('Comentarios',{id:this.props.id})}>
+            <Text style={styles.comentario}>Crear Comentario</Text>                
+          </TouchableOpacity>
+        </View>
+
       </View>
     )
   }
   
 }
 const styles = StyleSheet.create({
-    posteo:{
-        marginBottom: 60,
-        backgroundColor: 'lightgrey',
-        borderEndWidth: 10,
-        borderEndColor: 'black',
-      },
-  image:{
-      height: 300,
-      width: 300,
-      resizeMode: 'contain',
-      margin: 15,
-    },
-  posteosData:{
-    margin: 10
-  },
-  posteoTitulo:{
-    fontSize: '16px',
-    marginBottom: 10
-    
-  },
-  container:{
+  contenedorPosteo: {
     flex:1,
-    marginBottom: 20,
+    backgroundColor: "#FDFDFF",
+    paddingBottom: 40
   },
-  usuario:{
-    fontWeight: 'bold',
-    fontSize: '16px',
-    backgroundColor: '',
-    textAlign: 'center',
-    marginTop: 15
+  nombreUsuario:{
+    marginHorizontal: 10,
+    fontSize: 20,
   },
-  
+  image:{
+      height: 350,
+      width: 400,
+      resizeMode: 'contain',
+    },
+  corazon:{
+    margin: 10,
+  },
+  descripcion:{
+    margin: 10,
+    fontSize: 16,
+  },
+  comentario:{
+    margin: 10,
+  }
 })
 
 export default Posteos 

@@ -94,7 +94,7 @@ class Perfil extends Component {
                     }
                 </View>
 
-                <View>
+                <View style={styles.container2}>
                     {
                         this.state.user.data ?
                             <FlatList
@@ -124,8 +124,13 @@ class Perfil extends Component {
 const styles = StyleSheet.create({
     contenedor:{
         flex:1,
-        paddingHorizontal: "7%",
         backgroundColor: "#FDFDFF",
+    },
+    container2:{
+        flex: 1,
+      },
+    usuario:{
+        padding: 20,
     },
     boton:{
         alignItems: 'center',
@@ -136,7 +141,7 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     textoBoton: {
-        color: "white"
+        color: "white",
       },
     textoUsuario: {
         fontSize: 30,
