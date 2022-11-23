@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import { auth, db } from '../../firebase/config'
-import { View, Text, TouchableOpacity, StyleSheet, FlatList, TextInput } from 'react-native'
-import Posteos from '../../components/Posteos/Posteos'
+import { db } from '../../firebase/config'
+import { View, Text, TouchableOpacity, FlatList, TextInput } from 'react-native'
+
 
 
 
@@ -9,45 +9,67 @@ class Buscador extends Component {
     constructor(props){
         super(props)
         this.state ={
+            users: [],
             busqueda : '',
-            postsUsuario : []
+            data: [],
+            id: '',
+            loading: false
       };
     }
 
-    buscador () {
-        db.collection('posteos')
-        .where('users', '==', this.state.search)
+    componentDidMount () {
+        db.collection('users')
         .onSnapshot((docs) => {
-            let posts = []
+            let usuarios = []
             docs.forEach((doc) => {
-                posts.push({
+                usuarios.push({
                     id: doc.id,
                     data: doc.data()
                 })
             })
 
             this.setState({
-                postsUsuario: posts
+                data: usuarios
             })
         })
+    }
+
+    buscador() {
+
+        let buscarUsuarios = this.state.data.filter(elm => { 
+
+             return elm.data.username.toUpperCase().includes(text.toUpperCase())})
+
+             this.setState({
+                
+               users: buscarUsuarios,
+           
+            }) 
     }
 
     render(){
         return(
             <View>
-                <TextInput
-                    onChangeText={(buscarTexto) => this.setState({busqueda:buscarTexto})}
-                    placeholder='Buscar'
-                />
-                <TouchableOpacity onPress={() => this.filter()}>
-                    <Text>Buscar</Text>
+
+                <TextInput  
+                onChangeText={ text => this.setState( {busqueda:text} )}
+                placeholder='Buscar...'
+                value={this.state.busqueda}>
+                </TextInput>
+
+                <TouchableOpacity onPress={()=> this.buscador(this.state.busqueda)}>
+                    <Text> Buscar </Text>
                 </TouchableOpacity>
+
                 <FlatList
-                    data={this.state.postsUsuario}
-                    keyExtractor={(postsUsuario) => postsUsuario.id}
-                    renderItem={({item}) => <Posteos postData={item}/>}
+                data={this.state.users}
+                keyExtractor={(item) => item.id}
+                renderItem= {({item}) => <Text>{item.data.username}</Text>}
+        
                 />
-            </View>
+        
+             
+        </View>
         )
     }
 
