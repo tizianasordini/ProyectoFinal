@@ -11,7 +11,7 @@ class Posteos extends Component {
     constructor(props){
         super(props)
         this.state = {
-            likesCount:props.data.likes,
+            likesCount:props.data.likes.length,
             commentCount: props.data.comments,
             miLike: false
         }
@@ -34,7 +34,7 @@ class Posteos extends Component {
       .then(()=> {
         this.setState({
           miLike:true,
-          likesCount: this.state.likesCount + 1
+          likesCount: this.state.likesCount.length + 1
         })
       })
       .catch(err => console.log(err))
@@ -47,7 +47,7 @@ class Posteos extends Component {
       .then(()=> {
         this.setState({
           miLike:false,
-          likesCount: this.state.likesCount - 1
+          likesCount: this.state.likesCount.length - 1
         })
       })
       .catch(e => console.log(e))
