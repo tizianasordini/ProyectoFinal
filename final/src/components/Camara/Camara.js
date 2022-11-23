@@ -2,6 +2,8 @@ import {Camera} from 'expo-camera';
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, Image} from 'react-native'
 import { storage } from '../../firebase/config';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faCamera, faCheckCircle, faTimesCircle} from '@fortawesome/free-solid-svg-icons'
 
 
 class Camara extends Component{
@@ -70,10 +72,10 @@ class Camara extends Component{
                 />
                 <View>
                   <TouchableOpacity onPress={() => this.guardarFoto()}>
-                        <Text>Aceptar</Text>
+                        <FontAwesomeIcon icon={faCheckCircle}><Text>Aceptar</Text></FontAwesomeIcon>
                   </TouchableOpacity>
                   <TouchableOpacity>
-                        <Text>Denegar</Text>
+                        <FontAwesomeIcon icon={faTimesCircle}><Text>Cancelar</Text></FontAwesomeIcon>
                   </TouchableOpacity>
                 </View>
               </>
@@ -85,7 +87,7 @@ class Camara extends Component{
                   ref={(cam) => (this.camera = cam)}
                 />
                 <TouchableOpacity onPress={() => this.sacarFoto()}>
-                    <Text>Tomar Foto</Text>
+                  <FontAwesomeIcon icon={faCamera}><Text>Sacar Foto</Text></FontAwesomeIcon>
                 </TouchableOpacity>
               </>
             } 
