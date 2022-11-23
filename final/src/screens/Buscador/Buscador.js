@@ -34,13 +34,14 @@ class Buscador extends Component {
 
     render(){
         return(
-            <View>
+            <View style={styles.contenedor}>
                 <TextInput
+                    style={styles.input}
                     onChangeText={(buscarTexto) => this.setState({busqueda:buscarTexto})}
                     placeholder='Buscar'
                 />
-                <TouchableOpacity onPress={() => this.filter()}>
-                    <Text>Buscar</Text>
+                <TouchableOpacity style={styles.boton} onPress={() => this.filter()}>
+                    <Text style={styles.textoBoton}>Buscar</Text>
                 </TouchableOpacity>
                 <FlatList
                     data={this.state.postsUsuario}
@@ -52,4 +53,34 @@ class Buscador extends Component {
     }
 
 } 
+
+const styles = StyleSheet.create({
+    contenedor:{
+        flex:1,
+        justifyContent:'center',
+        
+        backgroundColor: "#FDFDFF",
+        padding: 30
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: "grey",
+        marginTop: 8,
+        marginBottom: 8,
+        backgroundColor: "white",
+        padding: 7
+    },
+    boton:{
+        alignItems: 'center',
+        borderRadius: 10,
+        padding: 7,
+        backgroundColor: 'black',
+        marginTop: 8,
+        marginBottom: 8,
+    },
+    textoBoton: {
+        color: "white"
+    },
+})
+
 export default Buscador

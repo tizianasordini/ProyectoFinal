@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Text, View, TextInput, TouchableOpacity, } from "react-native";
+import { Text, View, TextInput, TouchableOpacity,StyleSheet } from "react-native";
 import {auth, db} from '../../firebase/config';
 import Camara from "../../components/Camara/Camara";
 
@@ -27,7 +27,7 @@ class Posteo extends Component {
             this.setState({
                 titulo:'',
                 description: ''
-            })
+            }, ()=> this.props.navigation.navigate("Home"))
         })
         .catch(error => console.log(error))
     }
@@ -44,9 +44,9 @@ class Posteo extends Component {
         console.log(this.props);
         return this.state.mostrarCamara ? 
         (<Camara onImageUpload={(url)=> this.onImageUpload(url)}/>) :(
-            <View >
+            <View style={styles.contenedor}>
                 <TextInput 
-                    
+                    style={styles.input}
                     placeholder="Descripción"
                     keyboardType="default"
                     onChangeText={ text => this.setState({ description: text }) }
@@ -54,12 +54,41 @@ class Posteo extends Component {
                     multiline={true}
                 />
 
-                <TouchableOpacity  onPress={() => this.subirPosteo()}>
-                    <Text >Postear</Text>
+                <TouchableOpacity style={styles.boton} onPress={() => this.subirPosteo()}>
+                    <Text style={styles.textoBoton}>Postear</Text>
                 </TouchableOpacity>
             </View> 
         )
     }
 }
+
+const styles = StyleSheet.create({
+    contenedor:{
+        flex:1,
+        justifyContent:'center',
+        
+        backgroundColor: "#FDFDFF",
+        padding: 30
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: "grey",
+        marginTop: 8,
+        marginBottom: 8,
+        backgroundColor: "white",
+        padding: 7
+    },
+    boton:{
+        alignItems: 'center',
+        borderRadius: 10,
+        padding: 7,
+        backgroundColor: 'black',
+        marginTop: 8,
+        marginBottom: 8,
+    },
+    textoBoton: {
+        color: "white"
+    },
+})
 
 export default Posteo
