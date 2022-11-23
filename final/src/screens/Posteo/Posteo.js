@@ -7,7 +7,6 @@ class Posteo extends Component {
     constructor(){
         super();
         this.state = {
-            titulo: '',
             description: '',
             url: '',
             mostrarCamara: true,
@@ -18,7 +17,6 @@ class Posteo extends Component {
         db.collection('posteos').add({
             owner:auth.currentUser.email,
             createdAt: Date.now(),
-            titulo: this.state.titulo,
             description: this.state.description,
             likes: [],
             comentarios: [],
@@ -47,12 +45,6 @@ class Posteo extends Component {
         return this.state.mostrarCamara ? 
         (<Camara onImageUpload={(url)=> this.onImageUpload(url)}/>) :(
             <View >
-                <TextInput 
-                    placeholder="Título"
-                    keyboardType="default"
-                    onChangeText={ text => this.setState({ titulo: text }) }
-                    value={this.state.titulo}
-                />
                 <TextInput 
                     
                     placeholder="Descripción"

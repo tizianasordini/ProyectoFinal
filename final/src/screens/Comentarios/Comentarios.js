@@ -2,12 +2,13 @@ import { Text, View, TextInput, TouchableOpacity, StyleSheet, FlatList } from 'r
 import React, { Component } from 'react'
 import {db, auth} from '../../firebase/config'
 import firebase from 'firebase'
+import {FontAwesome} from '@expo/vector-icons'
 
 class Comentarios extends Component {
   constructor(props){
     super(props)
     this.state = {
-      posteaComentario:'',
+      comentarioNuevo:'',
       id:'',
       data:{}
     }
@@ -19,12 +20,17 @@ class Comentarios extends Component {
       this.setState({
         id: doc.id,
         data: doc.data(),
-      })
+      }, ()=> console.log(this.state.data))
+      console.log(doc)
     })
   }
 
   nuevoComentario(idDoc, text){
-    db.collection('posteos')
+    console.log(idDoc, text)
+    if (this.state.comentarioNuevo === "" || this.state.comentarioNuevo === false){
+      alert('enviar campos completos') // || es or , basicamente es para que no se envien campos vacios 
+    } else { 
+      db.collection('posteos')
     .doc(idDoc)
     .update({
       comentarios: firebase.firestore.FieldValue.arrayUnion({
@@ -33,44 +39,51 @@ class Comentarios extends Component {
         comentario: text
       })
     })
+    .then(()=>{
+      this.setState({
+        comentarioNuevo: '',
+      })
+    })
+    .catch((error)=> console.log(error))
+    }
+    
   }
 
   render() {
-    console.log(this.state)
-    return (
-      <View>
-        <Text>Seccion de Comentarios</Text>
-        <View>
-
-          <FlatList
-          data={this.state.data.comentarios}
-          keyExtractor={ item => item.createdAt.toString()}
-          renderItem={ ({item}) => 
-          <Text> {item.comentario} </Text>}/>
-
-          {
-            this.state.data.comentarios ?
-            <Text>Cantidad de Comentarios: {this.state.data.comentarios.length}</Text>
-            :
-            ''
-          }
-          
-
+   console.log(this.state.id)
+   console.log(this.props)
+   return(
+    <View>
+      <TouchableOpacity onPress={()=> this.props.navigation.navigate('HomeNavigation')}>
+        <FontAwesome name= 'backward' color= 'black' size={16} />
+      </TouchableOpacity>
+    <Text>Seccion de comentarios</Text>
+    <View>
+      <FlatList
+      data={this.state.data?.comentarios}  //singo de pregunta sirve para que si esta undifined el codigo no se rompa
+      keyExtractor={item => item.createdAt.toString()}
+      renderItem={({item})=> <View>
+        <Text>{item.owner}</Text>
+        <Text>{item.comentario}</Text>
         </View>
-        <View>
-          <TextInput
-            onChangeText={text => this.setState({posteaComentario: text})}
-            style = {styles.input}
-            keyboardType='default'
-            placeholder='Crea un comentario'
-            value={this.state.posteaComentario}
-          />
-          <TouchableOpacity onPress={()=> this.nuevoComentario(this.state.id, this.state.posteaComentario)}>
-            <Text>postear comentario</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+        }
+        />
+    </View>
+    <View>
+      <TextInput
+      onChangeText={text => this.setState({comentarioNuevo:text})}
+       style={styles.input}
+      keyboardType='default'
+      placeholder='Hace tu comentario'
+      value={this.state.nuevoComentario}
+      />
+      <TouchableOpacity onPress={()=> this.nuevoComentario(this.state.id, this.state.comentarioNuevo)}>
+        <Text>Enviar Comentario</Text>
+      </TouchableOpacity>
+    </View>
+    </View>  
     )
+      
   }
 }
 
