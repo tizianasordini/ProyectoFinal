@@ -62,7 +62,7 @@ class Camara extends Component{
       console.log('hola')
         return (
           <>
-            {this.state.foto ? (
+            {this.state.foto ? 
               <>
                 <Image
                   style={{ flex: 1, width: "100%" }}    //me parecion mas facil usar los estilos, pero si quieren lo codeo x fuera del render dentro de una variable styles con const
@@ -77,7 +77,7 @@ class Camara extends Component{
                   </TouchableOpacity>
                 </View>
               </>
-            ) :  (
+             :  
               <>
                 <Camera
                   style={{ flex: 1, width: "100%" }}
@@ -88,7 +88,7 @@ class Camara extends Component{
                     <Text>Tomar Foto</Text>
                 </TouchableOpacity>
               </>
-            )} 
+            } 
           </>
         );
       }
