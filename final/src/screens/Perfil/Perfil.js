@@ -34,16 +34,16 @@ class Perfil extends Component {
       db.collection('posteos')
       .where('owner', '==', auth.currentUser.email)
       .onSnapshot((docs) => {
-            let posteoAmigo = [];
+            let post = [];
             docs.forEach((doc) => {
-                posteoAmigo.push({
+                post.push({
                     id: doc.id,
                     data: doc.data()
                 })
             })
     
             this.setState({
-                allPosts: posteoAmigo
+                allPosts: post
             }, ()=> console.log(this.state))
         }
       )
