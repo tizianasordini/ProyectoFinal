@@ -24,63 +24,63 @@ class Register extends Component {
                             username: username,
                             createdAt: Date.now()
                         })
-                        .then(()=> console.log('subio'))
                         .catch(err => console.log(err))
                 })
                 .then(resp => this.props.navigation.navigate("TabNavigation"))
                 .catch(error => console.log(this.setState({mensaje: error.message})))
     }
 
-  render() {
-    return (
-    <View style={styles.contenedor}>
-        <Text style={styles.titulo}>¡Únete a la comunidad digital viajera!</Text>
-        <TextInput
-            style={styles.input}
-            placeholder="Usuario"
-            keyboardType="default"
-            onChangeText={text => this.setState({username: text})}
-            value={this.state.username}
-        />
-        <TextInput
-            style={styles.input}
-            placeholder="Biografía"
-            keyboardType="default"
-            onChangeText={text => this.setState({bio: text})}
-            value={this.state.bio}
-        />
-        <TextInput
-            style={styles.input}
-            placeholder="Correo electrónico"
-            keyboardType="email-address"
-            onChangeText={text => this.setState({email: text})}
-            value={this.state.email}
-        />
-        <TextInput
-            style={styles.input}
-            placeholder="Contraseña"
-            keyboardType="default"
-            onChangeText={text => this.setState({password: text})}
-            value={this.state.password}
-            secureTextEntry={true}
-        />
-        <Text style={styles.textoerror}>{this.state.mensaje}</Text>
-        
-        <View>
+    render() {
+        return (
+            <View style={styles.contenedor}>
 
-            <TouchableOpacity style={styles.boton} onPress={() => this.registrarUsuario(this.state.username, this.state.email, this.state.password, this.state.bio)}>
-                <Text style={styles.textoBoton}>Registrarme</Text>
-            </TouchableOpacity>
+                <Text style={styles.titulo}>¡Únete a la comunidad digital viajera!</Text>
+                
+                <TextInput
+                    style={styles.input}
+                    placeholder="Usuario"
+                    keyboardType="default"
+                    onChangeText={text => this.setState({username: text})}
+                    value={this.state.username}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Biografía"
+                    keyboardType="default"
+                    onChangeText={text => this.setState({bio: text})}
+                    value={this.state.bio}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Correo electrónico"
+                    keyboardType="email-address"
+                    onChangeText={text => this.setState({email: text})}
+                    value={this.state.email}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Contraseña"
+                    keyboardType="default"
+                    onChangeText={text => this.setState({password: text})}
+                    value={this.state.password}
+                    secureTextEntry={true}
+                />
 
-            <Text>¿Ya tienes una cuenta? <TouchableOpacity onPress={()=> this.props.navigation.navigate('Login')}>
-                <Text style={styles.textoLink}>Inicia sesión</Text>
-                </TouchableOpacity>
-            </Text>
+                <Text style={styles.textoerror}>{this.state.mensaje}</Text>
+                
+                <View>
+                    <TouchableOpacity style={styles.boton} onPress={() => this.registrarUsuario(this.state.username, this.state.email, this.state.password, this.state.bio)}>
+                        <Text style={styles.textoBoton}>Registrarme</Text>
+                    </TouchableOpacity>
 
-        </View>
+                    <Text>¿Ya tienes una cuenta? <TouchableOpacity onPress={()=> this.props.navigation.navigate('Login')}>
+                        <Text style={styles.textoLink}>Inicia sesión</Text>
+                        </TouchableOpacity>
+                    </Text>
+                </View>
 
-    </View>
-    )
+            </View>
+        )
     }
 }
 
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     },
     textoLink: {
         textDecorationLine: "underline",
-      },
+    },
 })
 
 export default Register;
