@@ -34,11 +34,11 @@ class Buscador extends Component {
         })
     }
 
-    buscador() {
+    buscador(amigos) {
 
         let buscarUsuarios = this.state.data.filter(elm => { 
 
-             return elm.data.username.toUpperCase().includes(text.toUpperCase())})
+             return elm.data.username.toUpperCase().includes(amigos.toUpperCase())})
 
              this.setState({
                 
@@ -52,7 +52,7 @@ class Buscador extends Component {
             <View>
 
                 <TextInput  
-                onChangeText={ text => this.setState( {busqueda:text} )}
+                onChangeText={ amigos => this.setState( {busqueda:amigos} )}
                 placeholder='Buscar...'
                 value={this.state.busqueda}>
                 </TextInput>
