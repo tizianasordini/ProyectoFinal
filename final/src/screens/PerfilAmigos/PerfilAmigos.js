@@ -36,6 +36,7 @@ class PerfilAmigos extends Component {
 
             db.collection('posteos')
             .where('owner', '==', this.props.route.params.email )
+            .orderBy('createdAt', 'desc')
             .onSnapshot(docs => {
                 let posteos = []
                 docs.forEach(doc => {
@@ -56,7 +57,7 @@ class PerfilAmigos extends Component {
 
             render(){
                 return(
-                    <View>
+                    <View style={styles.posts}>
                         {
                         this.state.user.data ?
                             <Text>{this.state.user.data.email}</Text>
@@ -75,7 +76,7 @@ class PerfilAmigos extends Component {
 
                         {
                             this.state.user.data ?
-                                <FlatList
+                                <FlatList  style={styles.posts}
                                     data = {this.state.postsAmigo}
                                     keyExtractor = { item => item.id.toString()}
                                     renderItem = {({item}) => <Posteos navigation={this.props.navigation} data={item.data} id={item.id}/>}
@@ -92,33 +93,9 @@ class PerfilAmigos extends Component {
     }
     
     const styles = StyleSheet.create({
-        contenedor:{
-            flex:1,
-            backgroundColor: "#FDFDFF",
-        },
-        container2:{
-            flex: 1,
-        },
-        usuario:{
-            padding: 20,
-        },
-        boton:{
-            alignItems: 'center',
-            borderRadius: 10,
-            padding: 7,
-            backgroundColor: 'black',
-            marginTop: 8,
-            marginBottom: 8,
-        },
-        textoBoton: {
-            color: "white",
-        },
-        textoUsuario: {
-            fontSize: 40,
-            fontWeight: "bold",
-        },
-        infoUser:{
-            fontSize: 25,
+        posts:{
+            flex:1
+            
         }
     })
    

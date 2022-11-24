@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native
 import React, {Component} from 'react'
 import { auth, db } from '../../firebase/config'
 import Posteos from '../../components/Posteos/Posteos'
+import firebase from 'firebase'
 // import { getAuth, deleteUser } from "firebase/auth";
 
 class Perfil extends Component {
@@ -9,7 +10,7 @@ class Perfil extends Component {
         super(props)
         this.state ={
         allPosts: [],
-        user: {}
+        user: []
       }
     }
 
@@ -33,6 +34,7 @@ class Perfil extends Component {
     
       db.collection('posteos')
       .where('owner', '==', auth.currentUser.email)
+      .orderBy('createdAt', 'desc')
       .onSnapshot((docs) => {
             let post = [];
             docs.forEach((doc) => {
@@ -55,18 +57,15 @@ class Perfil extends Component {
         this.props.navigation.navigate('Login')
     }
     
-    /*
-    Eliminar un usuario (ejercicio adicional) 
-    delete(user).then(() => {
-    //la colección tenemos que borrar
-    })
-    .catch((error)=> console.log(error))
-
-    deleteUser(user).then(() => {
-    auth.currentUser
-    })
-    .catch((error)=> console.log(error))
-    */
+    /*eliminarUsuario(){
+        db.collection('users')
+        .doc(auth.currentUser.id)
+        .update({
+            user: firebase.FieldValue.arrayRemove('id')
+        })
+        this.props.navigation.navigate('Login')
+    }*/
+    
 
     render() { 
         return(
@@ -115,6 +114,14 @@ class Perfil extends Component {
                     </TouchableOpacity>
                 </View>
 
+                <View>
+                    <TouchableOpacity
+                    onPress={() => this.eliminarUsuario()}
+                    style = {styles.boton}
+                    >
+                        <Text style = {styles.textoBoton}>Eliminar usuario</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
 
         )
