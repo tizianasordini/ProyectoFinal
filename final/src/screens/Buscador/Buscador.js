@@ -74,4 +74,34 @@ class Buscador extends Component {
     }
 
 } 
+
+const styles = StyleSheet.create({
+    contenedor:{
+        flex:1,
+        justifyContent:'center',
+        
+        backgroundColor: "#FDFDFF",
+        padding: 30
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: "grey",
+        marginTop: 8,
+        marginBottom: 8,
+        backgroundColor: "white",
+        padding: 7
+    },
+    boton:{
+        alignItems: 'center',
+        borderRadius: 10,
+        padding: 7,
+        backgroundColor: 'black',
+        marginTop: 8,
+        marginBottom: 8,
+    },
+    textoBoton: {
+        color: "white"
+    },
+})
+
 export default Buscador
