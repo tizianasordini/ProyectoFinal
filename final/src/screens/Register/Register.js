@@ -1,6 +1,6 @@
-import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react'
 import { db, auth } from '../../firebase/config'
+import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 
 class Register extends Component {
 
@@ -35,7 +35,7 @@ class Register extends Component {
             <View style={styles.contenedor}>
 
                 <Text style={styles.titulo}>¡Únete a la comunidad digital viajera!</Text>
-                
+
                 <TextInput
                     style={styles.input}
                     placeholder="Usuario"

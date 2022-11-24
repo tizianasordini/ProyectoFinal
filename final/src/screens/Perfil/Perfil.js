@@ -79,17 +79,17 @@ class Perfil extends Component {
                     }
                     {
                         this.state.user.data ?
-                            <Text >{this.state.user.data.bio}</Text>
+                            <Text style={styles.infoUser}>{this.state.user.data.bio}</Text>
                             : ""
                     }
                     {
                         this.state.user.data ?
-                            <Text >{this.state.user.data.email}</Text>
+                            <Text style={styles.infoUser}>{this.state.user.data.email}</Text>
                             : ""
                     }
                     {
                         this.state.user.data ?
-                            <Text >Posteos: {this.state.allPosts.length}</Text>
+                            <Text style={styles.infoUser}>Posteos: {this.state.allPosts.length}</Text>
                             : ""
                     }
                 </View>
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     },
     container2:{
         flex: 1,
-      },
+    },
     usuario:{
         padding: 20,
     },
@@ -142,10 +142,13 @@ const styles = StyleSheet.create({
     },
     textoBoton: {
         color: "white",
-      },
+    },
     textoUsuario: {
-        fontSize: 30,
+        fontSize: 40,
         fontWeight: "bold",
+    },
+    infoUser:{
+        fontSize: 25,
     }
 })
 
