@@ -57,23 +57,26 @@ class PerfilAmigos extends Component {
 
             render(){
                 return(
-                    <View style={styles.posts}>
+                    <View style={styles.contenedor}>
+                        <View style={styles.usuario}>
                         {
                         this.state.user.data ?
-                            <Text>{this.state.user.data.email}</Text>
+                            <Text style={styles.textoUsuario}>{this.state.user.data.email}</Text>
                             : ""
                         }
                         {
                         this.state.user.data ?
-                            <Text>{this.state.user.data.bio}</Text>
+                            <Text style={styles.infoUser}>{this.state.user.data.bio}</Text>
                             : ""
                         }
                         {
                             this.state.user.data ?
-                                <Text>Posteos: {this.state.postsAmigo.length}</Text>
+                                <Text style={styles.infoUser}>Posteos: {this.state.postsAmigo.length}</Text>
                                 : ""
                         }
+                        </View>
 
+                        <View style={styles.container2}>
                         {
                             this.state.user.data ?
                                 <FlatList  style={styles.posts}
@@ -83,6 +86,7 @@ class PerfilAmigos extends Component {
                                 />
                                 : ""
                         }
+                        </View>
                     </View>
                 )
             }
@@ -93,9 +97,22 @@ class PerfilAmigos extends Component {
     }
     
     const styles = StyleSheet.create({
-        posts:{
-            flex:1
-            
+        contenedor:{
+            flex:1,
+            backgroundColor: "#FDFDFF",
+        },
+        container2:{
+            flex: 1,
+        },
+        usuario:{
+            padding: 20,
+        },
+        textoUsuario: {
+            fontSize: 30,
+            fontWeight: "bold",
+        },
+        infoUser:{
+            fontSize: 20,
         }
     })
    
