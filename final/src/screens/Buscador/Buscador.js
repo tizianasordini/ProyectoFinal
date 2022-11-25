@@ -64,7 +64,12 @@ class Buscador extends Component {
                 <FlatList
                 data={this.state.users}
                 keyExtractor={(item) => item.id}
-                renderItem= {({item}) => <Text>{item.data.username}</Text>}
+                renderItem= {({item}) => <TouchableOpacity onPress={
+                    ()=> this.props.navigation.navigate('HomeNavigation', {screen: 'PerfilAmigos', params: {email:this.props.data.owner}                  })
+
+                }>
+                    {item.data.username}
+                    </TouchableOpacity>}
         
                 />
         
