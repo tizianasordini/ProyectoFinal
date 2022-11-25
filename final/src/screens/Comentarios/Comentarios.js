@@ -53,34 +53,30 @@ class Comentarios extends Component {
    console.log(this.state.id)
    console.log(this.props)
    return(
-    <View>
-      <TouchableOpacity onPress={()=> this.props.navigation.navigate('HomeNavigation')}>
-        <FontAwesome name= 'backward' color= 'black' size={16} />
-      </TouchableOpacity>
-    <Text>Seccion de comentarios</Text>
-    <View>
-      <FlatList
-      data={this.state.data?.comentarios}  //singo de pregunta sirve para que si esta undifined el codigo no se rompa
-      keyExtractor={item => item.createdAt.toString()}
-      renderItem={({item})=> <View>
-        <Text>{item.owner}</Text>
-        <Text>{item.comentario}</Text>
-        </View>
-        }
+    <View style={styles.contenedor}>
+      <View>
+        <FlatList
+        data={this.state.data?.comentarios}  //singo de pregunta sirve para que si esta undifined el codigo no se rompa
+        keyExtractor={item => item.createdAt.toString()}
+        renderItem={({item})=> <View style={styles.contenedor}>
+          <Text style={styles.nombreUsuario}>{item.owner}</Text>
+          <Text style={styles.comentario}>{item.comentario}</Text>
+          </View>
+          }
         />
-    </View>
-    <View>
-      <TextInput
-      onChangeText={text => this.setState({comentarioNuevo:text})}
-       style={styles.input}
-      keyboardType='default'
-      placeholder='Hace tu comentario'
-      value={this.state.nuevoComentario}
-      />
-      <TouchableOpacity onPress={()=> this.nuevoComentario(this.state.id, this.state.comentarioNuevo)}>
-        <Text>Enviar Comentario</Text>
-      </TouchableOpacity>
-    </View>
+      </View>
+      <View>
+        <TextInput
+        onChangeText={text => this.setState({comentarioNuevo:text})}
+        style={styles.input}
+        keyboardType='default'
+        placeholder='Hace tu comentario...'
+        value={this.state.nuevoComentario}
+        />
+        <TouchableOpacity style={styles.boton} onPress={()=> this.nuevoComentario(this.state.id, this.state.comentarioNuevo)}>
+          <Text style={styles.textoBoton}>Enviar Comentario</Text>
+        </TouchableOpacity>
+      </View>
     </View>  
     )
       
@@ -88,9 +84,34 @@ class Comentarios extends Component {
 }
 
 const styles = StyleSheet.create({
+  contenedor:{
+    padding: 15,
+    backgroundColor: "#FDFDFF",
+  },
   input: {
     borderWidth:1,
-    height:32
+    borderColor: "grey",
+    marginTop: 8,
+    marginBottom: 8,
+    backgroundColor: "white",
+    padding: 7
+  },
+  boton:{
+    alignItems: 'center',
+    borderRadius: 10,
+    padding: 7,
+    backgroundColor: 'black',
+    marginTop: 8,
+    marginBottom: 8,
+  },
+  textoBoton: {
+    color: "white"
+  },
+  nombreUsuario:{
+    fontSize: 22,
+  },
+  comentario:{
+    fontSize: 20,
   }
 })
 
