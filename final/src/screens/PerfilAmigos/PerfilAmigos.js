@@ -115,7 +115,6 @@ class PerfilAmigos extends Component {
             fontSize: 20,
         }
     })
-   
-    
+
 
 export default PerfilAmigos
