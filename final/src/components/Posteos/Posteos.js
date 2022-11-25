@@ -34,7 +34,7 @@ class Posteos extends Component {
       .then(()=> {
         this.setState({
           miLike:true,
-          likesCount: this.state.likesCount.length + 1
+          likesCount: this.state.likesCount + 1
         })
       })
       .catch(err => console.log(err))
@@ -47,7 +47,7 @@ class Posteos extends Component {
       .then(()=> {
         this.setState({
           miLike:false,
-          likesCount: this.state.likesCount.length - 1
+          likesCount: this.state.likesCount - 1
         })
       })
       .catch(e => console.log(e))
@@ -66,26 +66,37 @@ class Posteos extends Component {
 
         <Image style={styles.image} source={this.props.data.foto} resizeMode={'contain'}/>
 
-        <Text>{this.state.likesCount}</Text>
+        
           
         {
           this.state.miLike ?
-            <TouchableOpacity onPress={()=> this.borrarLike()}>
-              <FontAwesome name='heart' color='black' size={16} />
-            </TouchableOpacity>
+            <View style={styles.container1}>
+              <Text style={styles.descripcion}>{this.props.data.description}</Text>
+              
+                <TouchableOpacity onPress={()=> this.borrarLike()}>
+                  <Text>{this.state.likesCount}
+                  <FontAwesome style={styles.corazon} name='heart' color='red' size={20} />
+                  </Text>
+                </TouchableOpacity>
+              
+            </View>
             :
-            <TouchableOpacity onPress={()=> this.like()}>
-              <FontAwesome style={styles.corazon} name='heart-o' color='red' size={16} />
-            </TouchableOpacity>
+            <View style={styles.container1}>
+              <Text style={styles.descripcion}>{this.props.data.description}</Text>
+              
+                <TouchableOpacity onPress={()=> this.like()}>
+                  <Text>{this.state.likesCount}
+                  <FontAwesome style={styles.corazon} name='heart-o' color='red' size={20} />
+                  </Text>
+                </TouchableOpacity>
+              
+            </View>
         }
         
-        <View>
-          <Text style={styles.descripcion}>{this.props.data.description}</Text>
-        </View>
         
         <View>
           <TouchableOpacity onPress={()=> this.props.navigation.navigate('Comentarios',{id:this.props.id})}>
-            <Text style={styles.comentario}>Crear Comentario</Text>                
+            <Text style={styles.comentario}>Crear Comentario...</Text>                
           </TouchableOpacity>
         </View>
 
@@ -98,11 +109,19 @@ const styles = StyleSheet.create({
   contenedorPosteo: {
     flex:1,
     backgroundColor: "#FDFDFF",
-    paddingBottom: 40
+    paddingBottom: 15,
+	
   },
+  container1:{
+		flexDirection:'row', 
+		justifyContent:'space-between'
+	},
+  containerIconos:{
+		flexDirection:'row',
+	},
   nombreUsuario:{
-    marginHorizontal: 10,
-    fontSize: 20,
+    marginHorizontal: 15,
+    fontSize: 22,
   },
   image:{
       height: 350,
@@ -110,14 +129,15 @@ const styles = StyleSheet.create({
       resizeMode: 'contain',
     },
   corazon:{
-    margin: 10,
+    margin: 15,
   },
   descripcion:{
-    margin: 10,
-    fontSize: 16,
+    marginBottom: 15,
+    marginLeft: 15,
+    fontSize: 20,
   },
   comentario:{
-    margin: 10,
+    margin: 15,
   }
 })
 
