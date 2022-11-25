@@ -14,7 +14,7 @@ class Buscador extends Component {
             data: [],
             id: '',
             loading: false
-      };
+    };
     }
 
     componentDidMount () {
@@ -49,32 +49,36 @@ class Buscador extends Component {
 
     render(){
         return(
-            <View>
+            <View style={styles.contenedor}>
 
-                <TextInput  
+                <TextInput
+                style={styles.input}  
                 onChangeText={ amigos => this.setState( {busqueda:amigos} )}
                 placeholder='Buscar...'
                 value={this.state.busqueda}>
                 </TextInput>
 
-                <TouchableOpacity onPress={()=> this.buscador(this.state.busqueda)}>
-                    <Text> Buscar </Text>
+                <TouchableOpacity style={styles.boton} onPress={()=> this.buscador(this.state.busqueda)}>
+                    <Text style={styles.textoBoton}> Buscar </Text>
                 </TouchableOpacity>
 
-                <FlatList
-                data={this.state.users}
-                keyExtractor={(item) => item.id}
-                renderItem= {({item}) => <TouchableOpacity onPress={
-                    ()=> this.props.navigation.navigate('HomeNavigation', {screen: 'PerfilAmigos', params: {email:this.props.data.owner}                  })
-
-                }>
-                    {item.data.username}
-                    </TouchableOpacity>}
-        
-                />
-        
-             
-        </View>
+                { this.state.resultado == false ?
+                    <Text> No se encontraron resultados de búsqueda.</Text> :
+                    <FlatList
+                    data={this.state.users}
+                    keyExtractor={(item) => item.id}
+                    renderItem= {({item}) => (
+                        <View>
+                            <TouchableOpacity  onPress={ ()=> this.props.navigation.navigate('HomeNavigation', {screen: 'PerfilAmigos', params: {email:item.data.username}                  
+                            })}>
+                                <Text>{item.data.username}</Text>
+                            </TouchableOpacity>
+                        </View>)}
+                        
+            
+                    />
+                }
+            </View>
         )
     }
 
